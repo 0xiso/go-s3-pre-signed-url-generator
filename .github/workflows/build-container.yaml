@@ -1,9 +1,10 @@
-name: Build and Release
+name: Build and Release a Container
 
 on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
 
 permissions:
   id-token: write
