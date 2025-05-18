@@ -25,4 +25,17 @@ jobs:
 
       - uses: ko-build/setup-ko@v0.9
 
-      - run: ko build --bare
+      - id: kb
+        run: |
+          image_reference=`ko build --bare --sbom-dir=sbom-dir`
+          echo "image_name=${image_reference%@*}" >> $GITHUB_OUTPUT
+          echo "image_digest=${image_reference#*@}" >> $GITHUB_OUTPUT
+
+      - name: Attest
+        uses: actions/attest-sbom@v2
+        id: attest
+        with:
+          subject-name: ${{ steps.kb.outputs.image_name }}
+          subject-digest: ${{ steps.ko.outputs.image_digest }}
+          sbom-path: 'sbom-dir'
+          push-to-registry: true
