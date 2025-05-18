@@ -8,8 +8,8 @@ on:
 
 permissions:
   id-token: write
-  contents: write
   attestations: write
+  package: write
 
 jobs:
   build:
@@ -25,4 +25,4 @@ jobs:
 
       - uses: ko-build/setup-ko@v0.9
 
-      - run: ko build
+      - run: ko build --bare
