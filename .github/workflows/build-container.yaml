@@ -25,7 +25,7 @@ jobs:
 
       - uses: ko-build/setup-ko@v0.9
 
-      - id: kb
+      - id: ko
         run: |
           image_reference=`ko build --bare --sbom-dir=sbom-dir`
           echo "image_name=${image_reference%@*}" >> $GITHUB_OUTPUT
@@ -35,7 +35,7 @@ jobs:
         uses: actions/attest-sbom@v2
         id: attest
         with:
-          subject-name: ${{ steps.kb.outputs.image_name }}
+          subject-name: ${{ steps.ko.outputs.image_name }}
           subject-digest: ${{ steps.ko.outputs.image_digest }}
           sbom-path: sbom-dir/go-s3-pre-signed-url-generator-linux-amd64.spdx.json
           push-to-registry: true
