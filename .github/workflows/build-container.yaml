@@ -31,6 +31,11 @@ jobs:
           echo "image_name=${image_reference%@*}" >> $GITHUB_OUTPUT
           echo "image_digest=${image_reference#*@}" >> $GITHUB_OUTPUT
 
+      - uses: actions/upload-artifact@v4
+        with:
+          name: go-s3-pre-signed-url-generator-linux-amd64.spdx.json
+          path: sbom-dir/go-s3-pre-signed-url-generator-linux-amd64.spdx.json
+
       - name: Attest
         uses: actions/attest-sbom@v2
         id: attest
