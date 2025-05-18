@@ -27,7 +27,7 @@ jobs:
 
       - id: ko
         run: |
-          image_reference=`ko build --bare --sbom-dir=sbom-dir --push=false`
+          image_reference=`ko build --bare --sbom-dir=sbom-dir`
           echo "image_name=${image_reference%@*}" >> $GITHUB_OUTPUT
           echo "image_digest=${image_reference#*@}" >> $GITHUB_OUTPUT
 
