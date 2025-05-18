@@ -9,7 +9,7 @@ on:
 permissions:
   id-token: write
   attestations: write
-  package: write
+  packages: write
 
 jobs:
   build:
